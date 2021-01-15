@@ -4,7 +4,6 @@ cp docker/var.env.example docker/var_test.env
 cp realforce/.env.test realforce/.env.test.local
 
 alias dd_test='docker-compose -f docker/docker-compose-test.yml'
-alias console_test='docker-compose -f docker/docker-compose-test.yml exec fpm_test realforce/bin/console'
 dd_test up -d
 
 dd_test exec fpm_test realforce/bin/phpunit realforce/tests --bootstrap=realforce/tests/bootstrap.php

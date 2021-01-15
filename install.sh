@@ -9,17 +9,12 @@ alias dd='docker-compose -f docker/docker-compose.yml'
 alias console='docker-compose -f docker/docker-compose.yml exec fpm realforce/bin/console'
 dd up -d
 
-sleep 20
-
 dd exec fpm composer install --working-dir=realforce
 dd exec fpm composer require doctrine/doctrine-fixtures-bundle symfony/phpunit-bridge --dev --working-dir=realforce
 
 alias dd_test='docker-compose -f docker/docker-compose-test.yml'
 dd_test up -d
 
-dd exec fpm realforce/bin/phpunit
+dd_test exec fpm_test realforce/bin/phpunit realforce/tests --bootstrap=realforce/tests/bootstrap.php
 
-console --env=test doctrine:schema:drop --full-database --force -n
 dd_test down
-
-console about
