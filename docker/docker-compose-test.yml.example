@@ -12,7 +12,7 @@ services:
     links:
       - fpm_test
     networks:
-      - realforce
+      - realforce_test
 
   fpm_test:
     image: koshpaevsv/php7.4
@@ -23,30 +23,11 @@ services:
     working_dir: /var/www/html
     expose:
       - 9000
-    links:
-      - mysql_test
     networks:
-      - realforce
-
-  mysql_test:
-    image: mysql:8
-    container_name: mysql_realforce_test
-    command: ["--default-authentication-plugin=mysql_native_password", "--max_allowed_packet=256M"]
-    env_file:
-      - var_test.env
-    environment:
-      MYSQL_DATABASE: "realforce"
-      MYSQL_USER: "realforce"
-    volumes:
-      - ./data_test:/var/lib/mysql/
-      - ./logs/mysql_test:/var/log/mysql
-    ports:
-      - "3308:3306"
-    networks:
-      - realforce
+      - realforce_test
 
 networks:
-  realforce:
+  realforce_test:
     external:
-      name: realforce
+      name: realforce_test
 
