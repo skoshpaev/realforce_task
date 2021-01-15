@@ -14,16 +14,8 @@ sleep 20
 dd exec fpm composer install --working-dir=realforce
 dd exec fpm composer require doctrine/doctrine-fixtures-bundle symfony/phpunit-bridge --dev --working-dir=realforce
 
-console doctrine:migrations:migrate -n
-console doctrine:fixtures:load --append
-
 alias dd_test='docker-compose -f docker/docker-compose-test.yml'
 dd_test up -d
-
-sleep 20
-
-console doctrine:migrations:migrate -n --env=test
-console doctrine:fixtures:load --env=test --append
 
 dd exec fpm realforce/bin/phpunit
 
