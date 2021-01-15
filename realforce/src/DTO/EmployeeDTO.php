@@ -4,6 +4,10 @@ namespace App\DTO;
 
 use Exception;
 
+/**
+ * Class EmployeeDTO - is Data transfer class for making an object from json
+ * @package App\DTO
+ */
 class EmployeeDTO
 {
     private int $age;
@@ -11,6 +15,12 @@ class EmployeeDTO
     private bool $hasCompanyCar;
     private float $salary;
 
+    /**
+     * The main method that builds all data from json into an object
+     *
+     * @param string $postBody
+     * @return bool
+     */
     public function build(string $postBody): bool
     {
         $array = json_decode($postBody, true);

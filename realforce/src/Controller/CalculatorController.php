@@ -14,6 +14,10 @@ class CalculatorController extends AbstractController
 {
     private SalaryValidator $salaryValidator;
 
+    /**
+     * CalculatorController constructor.
+     * @param SalaryValidator $salaryValidator
+     */
     public function __construct(SalaryValidator $salaryValidator)
     {
         $this->salaryValidator = $salaryValidator;
