@@ -11,6 +11,9 @@ class SalaryValidator
     private int $kidsLimit;
     private int $deductForCar;
 
+    /**
+     * SalaryValidator constructor.
+     */
     public function __construct()
     {
         $this->countryTax = $_ENV['COUNTRY_TAX'];
@@ -19,6 +22,12 @@ class SalaryValidator
         $this->deductForCar = $_ENV['DEDUCT_FOR_CAR'];
     }
 
+    /**
+     * Common method for calculating final salary after all
+     *
+     * @param EmployeeDTO $employee
+     * @return float
+     */
     public function getSalaryByEmployee(EmployeeDTO $employee): float
     {
         $salary = $employee->getSalary();
@@ -61,6 +70,13 @@ class SalaryValidator
         $this->countryTax = $countryTax;
     }
 
+    /**
+     * The method calculates salary by age limit
+     *
+     * @param int $age
+     * @param $salary
+     * @return float
+     */
     public function calculateSalaryByAge(int $age, $salary): float
     {
         if ($age > $this->ageLimit) {
@@ -70,6 +86,12 @@ class SalaryValidator
         return $salary;
     }
 
+    /**
+     * The method calculates salary by kids
+     *
+     * @param int $getKidsNumber
+     * @return int
+     */
     public function calculateTaxByKids(int $getKidsNumber): int
     {
         if ($getKidsNumber > $this->getKidsLimit()) {
@@ -79,6 +101,13 @@ class SalaryValidator
         return $this->getCountryTax();
     }
 
+    /**
+     * The method calculates salary by having company's car
+     *
+     * @param bool $hasCompanyCar
+     * @param float $salary
+     * @return float
+     */
     public function calculateSalaryByCompanyCar(bool $hasCompanyCar, float $salary): float
     {
         if (true === $hasCompanyCar) {
@@ -88,6 +117,12 @@ class SalaryValidator
         return $salary;
     }
 
+    /**
+     * The method calculates salary by Tax
+     *
+     * @param float $salary
+     * @return float
+     */
     public function calculateSalaryByTax(float $salary): float
     {
         return $salary - ($salary * ($this->getCountryTax() * 0.01));
